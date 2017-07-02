@@ -13,6 +13,6 @@ then
 echo "Running tests on emulator" &&
 ./gradlew connectedAndroidTest
 else
-echo "Usage: \"./run-instrumented-tests.sh [already-conneted | start-emulator]\""
+echo "Usage: \"./run-instrumented-tests.sh [already-connected | start-emulator]\""
 fi
 
