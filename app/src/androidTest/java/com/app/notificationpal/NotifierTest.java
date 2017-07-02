@@ -13,14 +13,10 @@ import org.junit.runner.RunWith;
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static org.junit.Assert.assertEquals;
 
-/**
- * Instrumentation test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 public class NotifierTest {
-    Context appContext = InstrumentationRegistry.getTargetContext();
+    private Context appContext = InstrumentationRegistry.getTargetContext();
+    NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
 
     @Test
     public void usesAppContext() throws Exception {
@@ -32,7 +28,6 @@ public class NotifierTest {
     public void canCreateNotification() {
         new Notifier(appContext).createNotification("Local train time", "The next train from West Dulwich to Victoria is in 15 minutes");
 
-        NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
         assertEquals("com.app.notificationpal", notificationManager.getActiveNotifications()[0].getPackageName());
     }
 }
