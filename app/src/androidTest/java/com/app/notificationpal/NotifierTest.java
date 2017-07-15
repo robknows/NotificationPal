@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class NotifierTest {
     private Context appContext = InstrumentationRegistry.getTargetContext();
-    NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
+    private NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
 
     @Test
     public void usesAppContext() throws Exception {
@@ -26,7 +26,7 @@ public class NotifierTest {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Test
     public void canCreateNotification() {
-        new Notifier(appContext).createNotification("Local train time", "The next train from West Dulwich to Victoria is in 15 minutes");
+        new Notifier(appContext).createNotification("Local Train Time", "The next train from West Dulwich to Victoria is in 15 minutes");
 
         assertEquals("com.app.notificationpal", notificationManager.getActiveNotifications()[0].getPackageName());
     }
