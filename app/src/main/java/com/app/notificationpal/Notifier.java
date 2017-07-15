@@ -18,7 +18,7 @@ public class Notifier {
     public void createNotification(String title, String message) {
         // Note: setSmallIcon, setContentTitle and setContentText are all mandatory fields that must be set.
         Notification notification = new Builder(appContext)
-                .setSmallIcon(R.drawable.notification_icon)
+                .setSmallIcon(R.drawable.notificationpal_icon)
                 .setContentTitle(title)
                 .setContentText(message)
                 .build();
