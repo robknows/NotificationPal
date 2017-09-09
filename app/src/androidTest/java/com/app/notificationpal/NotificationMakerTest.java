@@ -29,6 +29,19 @@ public class NotificationMakerTest {
     @Test
     public void canMakeNotification() {
         onView(withId(R.id.submitNotification)).perform(ViewActions.click());
+
         assertEquals("Local Train Time", notificationManager.getActiveNotifications()[0].getNotification().extras.getString(Notification.EXTRA_TITLE));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Test
+    public void makesNotificationOnlyOnce() {
+        onView(withId(R.id.submitNotification)).perform(ViewActions.click());
+        onView(withId(R.id.submitNotification)).perform(ViewActions.click());
+        onView(withId(R.id.submitNotification)).perform(ViewActions.click());
+        onView(withId(R.id.submitNotification)).perform(ViewActions.click());
+
+        assertEquals("Local Train Time", notificationManager.getActiveNotifications()[0].getNotification().extras.getString(Notification.EXTRA_TITLE));
+        assertEquals(1, notificationManager.getActiveNotifications().length);
     }
 }
