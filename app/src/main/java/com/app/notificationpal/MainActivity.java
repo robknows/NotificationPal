@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -18,12 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Notifier notifier = new Notifier(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.submitNotification);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notifier.createNotification("Local Train Time", "...");
-            }
-        });
+        fab.setOnClickListener(view -> notifier.createNotification("Local Train Time"));
     }
 
     @Override

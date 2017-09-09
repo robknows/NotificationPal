@@ -15,12 +15,12 @@ public class Notifier {
         this.appContext = appContext;
     }
 
-    public void createNotification(String title, String message) {
+    public void createNotification(String title) {
         // Note: setSmallIcon, setContentTitle and setContentText are all mandatory fields that must be set.
         Notification notification = new Builder(appContext)
                 .setSmallIcon(R.drawable.notificationpal_icon)
                 .setContentTitle(title)
-                .setContentText(message)
+                .setContentText("")
                 .build();
 
         NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);

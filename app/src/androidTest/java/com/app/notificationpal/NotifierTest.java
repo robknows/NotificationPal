@@ -26,7 +26,7 @@ public class NotifierTest {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Test
     public void canCreateNotification() {
-        new Notifier(appContext).createNotification("Local Train Time", "The next train from West Dulwich to Victoria is in 15 minutes");
+        new Notifier(appContext).createNotification("West Dulwich to Victoria train in 15 minutes");
 
         assertEquals("com.app.notificationpal", notificationManager.getActiveNotifications()[0].getPackageName());
     }
