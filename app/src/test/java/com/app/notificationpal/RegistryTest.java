@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -15,12 +16,14 @@ public class RegistryTest {
     private Notifier mockNotifier;
     private Registry registry;
     private Constraint arbitraryConstraint;
+    private TimeConstraint timeConstraint;
 
     @Before
     public void beforeEach() {
         mockNotifier = Mockito.mock(Notifier.class);
         registry = new Registry(mockNotifier);
         arbitraryConstraint = new ArbitraryConstraint();
+        timeConstraint = new TimeConstraint(TimeConstraint.Range.AFTER, TimeConstraint.Granularity.HOUR, 16);
     }
 
     @Test
@@ -48,5 +51,24 @@ public class RegistryTest {
         arbitraryConstraint.notifySubscribers();
 
         verify(mockNotifier, times(1)).createNotification("Hello!");
+    }
+
+    @Test
+    public void notificationWithTwoConstraintsDoesntTriggerAfterOnlyOneNotifies() {
+        registry.registerNotification("Hello!", arbitraryConstraint, timeConstraint);
+
+        arbitraryConstraint.notifySubscribers();
+
+        verify(mockNotifier, never()).createNotification("Hello!");
+    }
+
+    @Test
+    public void notificationWithTwoConstraintsTriggersAfterBothNotify() {
+        registry.registerNotification("Hello!", arbitraryConstraint, timeConstraint);
+
+        arbitraryConstraint.notifySubscribers();
+        timeConstraint.notifySubscribers();
+
+        verify(mockNotifier).createNotification("Hello!");
     }
 }
