@@ -35,4 +35,8 @@ public class Registry {
     public int count() {
         return registeredNotifications.size();
     }
+
+    public boolean contains(String notificationTitle) {
+        return registeredNotifications.stream().anyMatch(registeredNotification -> notificationTitle.equals(registeredNotification.title));
+    }
 }

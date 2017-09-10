@@ -6,8 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -16,28 +14,13 @@ import static org.mockito.Mockito.verify;
 public class RegistryTest {
     private Notifier mockNotifier;
     private Registry registry;
-
-    private Constraint arbitraryConstraint = new Constraint() {
-        public ArrayList<RegisteredNotification> subscribers = new ArrayList<>();
-
-        @Override
-        public Void notifySubscribers() {
-            for (RegisteredNotification registeredNotification : subscribers) {
-                registeredNotification.constraintSatisfied(this);
-            }
-            return null;
-        }
-
-        @Override
-        public void addSubscriber(RegisteredNotification registeredNotification) {
-            subscribers.add(registeredNotification);
-        }
-    };
+    private Constraint arbitraryConstraint;
 
     @Before
     public void beforeEach() {
         mockNotifier = Mockito.mock(Notifier.class);
         registry = new Registry(mockNotifier);
+        arbitraryConstraint = new ArbitraryConstraint();
     }
 
     @Test

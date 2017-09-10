@@ -13,13 +13,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Notifier notifier = new Notifier(this);
+        Registry registry = new Registry(new Notifier(this));
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.submitNotification);
-        fab.setOnClickListener(view -> {
-            EditText notificationName = (EditText) findViewById(R.id.notificationName);
-            notifier.createNotification(notificationName.getText().toString());
+        FloatingActionButton submitNotificationButton = (FloatingActionButton) findViewById(R.id.submitNotification);
+        submitNotificationButton.setOnClickListener(view -> {
+            Constraint arbitraryConstraint = new ArbitraryConstraint();
+
+            String notificationTitle = ((EditText) findViewById(R.id.notificationName)).getText().toString();
+
+            if (!registry.contains(notificationTitle)) {
+                registry.registerNotification(notificationTitle, arbitraryConstraint);
+                arbitraryConstraint.notifySubscribers();
+            } else {
+                display("You have already registered a notification with this name.");
+            }
         });
+    }
+
+    private void display(String msg) {
     }
 
     @Override

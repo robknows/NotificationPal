@@ -39,7 +39,7 @@ public class NotificationMakerTest {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Test
-    public void makesNotificationOnlyOnce() {
+    public void registersNotificationOnlyOnce() {
         onView(withId(R.id.notificationName)).perform(replaceText("Train Time")).perform(closeSoftKeyboard());
 
         onView(withId(R.id.submitNotification)).perform(click());
