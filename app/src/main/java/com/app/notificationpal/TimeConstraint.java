@@ -10,7 +10,7 @@ public class TimeConstraint extends SubscribedConstraint {
         AFTER;
 
         public boolean isSatisfied(int n, int m) {
-            return m > n;
+            return m >= n;
         }
     }
 
