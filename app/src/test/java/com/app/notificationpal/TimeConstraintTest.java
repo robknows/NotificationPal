@@ -36,4 +36,20 @@ public class TimeConstraintTest {
         timeConstraint.timeUpdate(2017, 8, 10, 12, 5, 0);
         verify(mockNotifier, never()).createNotification("It's after 2!");
     }
+
+    @Test
+    public void canApplyTimeConstraintForBeforeSomeMinute() {
+        TimeConstraint timeConstraint = new TimeConstraint(TimeConstraint.Range.BEFORE, TimeConstraint.Granularity.MINUTE, 30);
+        registry.registerNotification("It's the first half of the hour.", timeConstraint);
+        timeConstraint.timeUpdate(2017, 8, 10, 15, 20, 0);
+        verify(mockNotifier).createNotification("It's the first half of the hour.");
+    }
+
+    @Test
+    public void canApplyTimeConstraintForAtSomeDay() {
+        TimeConstraint timeConstraint = new TimeConstraint(TimeConstraint.Range.UPON, TimeConstraint.Granularity.DAY, 15);
+        registry.registerNotification("It's the 15th of the month.", timeConstraint);
+        timeConstraint.timeUpdate(2017, 10, 15, 15, 20, 0);
+        verify(mockNotifier).createNotification("It's the 15th of the month.");
+    }
 }

@@ -1,24 +1,35 @@
 package com.app.notificationpal;
 
 
+import java.util.Arrays;
+
 public class TimeConstraint extends SubscribedConstraint {
     private final Range range;
     private final Granularity granularity;
     private final int n;
 
     public enum Range {
-        AFTER;
+        AFTER, BEFORE, UPON;
 
         public boolean isSatisfied(int n, int m) {
-            return m >= n;
+            switch (this) {
+                case AFTER:
+                    return m >= n;
+                case BEFORE:
+                    return m < n;
+                case UPON:
+                    return m == n;
+            }
+            return false;
         }
     }
 
     public enum Granularity {
-        HOUR;
+        YEAR, MONTH, DAY, HOUR, MINUTE, SECOND;
 
         public int relevantUnit(int year, int month, int day, int hour, int minute, int second) {
-            return hour;
+            int indexOfRelevantUnit = Arrays.asList(values()).indexOf(this);
+            return new int[]{year, month, day, hour, minute, second}[indexOfRelevantUnit];
         }
     }
 
