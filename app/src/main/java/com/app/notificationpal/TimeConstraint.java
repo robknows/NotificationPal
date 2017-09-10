@@ -1,7 +1,7 @@
 package com.app.notificationpal;
 
 
-public class TimeConstraint extends SubscribedConstraint implements Constraint {
+public class TimeConstraint extends SubscribedConstraint {
     private final Range range;
     private final Granularity granularity;
     private final int n;
