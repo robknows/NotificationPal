@@ -20,7 +20,7 @@ import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.assertEquals;
 
-public class NotificationMakerTest {
+public class NotificationRegistryTest {
     @Rule
     public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, true);
 
@@ -29,7 +29,7 @@ public class NotificationMakerTest {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Test
-    public void canMakeNotification() {
+    public void canRegisterNotification() {
         onView(withId(R.id.notificationName)).perform(replaceText("Train Time")).perform(closeSoftKeyboard());
 
         onView(withId(R.id.submitNotification)).perform(click());
