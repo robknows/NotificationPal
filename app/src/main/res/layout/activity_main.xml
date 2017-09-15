@@ -6,16 +6,28 @@
     android:layout_height="match_parent"
     tools:context="com.app.notificationpal.MainActivity">
 
-    <EditText
-        android:id="@+id/notificationName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.00"
-        android:ems="10"
-        android:inputType="text"
-        android:maxLines="1"
-        android:text="Name of Notification"
-        android:visibility="visible" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/notificationName"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:maxLines="1"
+            android:text="@string/notification_name"
+            android:visibility="visible" />
+
+        <Spinner
+            android:id="@+id/constraintTypeSpinner"
+            android:layout_width="165dp"
+            android:layout_height="59dp"
+            android:entries="@array/constraint_types" />
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/submitNotification"

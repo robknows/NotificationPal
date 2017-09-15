@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">NotificationPal</string>
+
     <string name="action_settings">Settings</string>
+
+    <string name="notification_name">Label</string>
+
+    <string name="time">Time</string>
+    <string name="location">Location</string>
+
+    <string-array name="constraint_types">
+        <item>@string/time</item>
+        <item>@string/location</item>
+    </string-array>
 </resources>
