@@ -3,9 +3,11 @@ package com.app.notificationpal;
 import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,12 +28,14 @@ public class MainActivity extends AppCompatActivity {
                 registry.registerNotification(notificationTitle, arbitraryConstraint);
                 arbitraryConstraint.notifySubscribers();
             } else {
-                display("You have already registered a notification with this name.");
+                display(view, "You have already registered a notification with this name.");
             }
         });
     }
 
-    private void display(String msg) {
+    private void display(View view, String msg) {
+        Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     @Override
