@@ -1,5 +1,6 @@
 package com.app.notificationpal;
 
+import android.app.NotificationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Registry registry = new Registry(new Notifier(this));
+        Registry registry = new Registry(new Notifier((NotificationManager) this.getSystemService(NOTIFICATION_SERVICE), this));
 
         FloatingActionButton submitNotificationButton = (FloatingActionButton) findViewById(R.id.submitNotification);
         submitNotificationButton.setOnClickListener(view -> {

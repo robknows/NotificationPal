@@ -6,12 +6,12 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat.Builder;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
-
 public class Notifier {
+    private NotificationManager notificationManager;
     private Context appContext;
 
-    public Notifier(Context appContext) {
+    public Notifier(NotificationManager notificationManager, Context appContext) {
+        this.notificationManager = notificationManager;
         this.appContext = appContext;
     }
 
@@ -23,7 +23,7 @@ public class Notifier {
                 .setContentText("")
                 .build();
 
-        NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
+//        NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
     }
 }
