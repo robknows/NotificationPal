@@ -29,7 +29,7 @@ public class TimeConstraintTest {
     }
 
     @Test
-    public void doesntErroneouslyApplyTimeConstraintAfterSomeHour() {
+    public void doesntErroneouslyApplyTimeConstraintForAfterSomeHour() {
         TimeConstraint timeConstraint = new TimeConstraint(TimeConstraint.Range.AFTER, TimeConstraint.Granularity.HOUR, 14);
         registry.registerNotification("It's after 2!", timeConstraint);
         timeConstraint.timeUpdate(2017, 8, 10, 12, 5, 0);
@@ -45,7 +45,7 @@ public class TimeConstraintTest {
     }
 
     @Test
-    public void canApplyTimeConstraintForAtSomeDay() {
+    public void canApplyTimeConstraintForUponSomeDay() {
         TimeConstraint timeConstraint = new TimeConstraint(TimeConstraint.Range.UPON, TimeConstraint.Granularity.DAY, 15);
         registry.registerNotification("It's the 15th of the month.", timeConstraint);
         timeConstraint.timeUpdate(2017, 10, 15, 15, 20, 0);
