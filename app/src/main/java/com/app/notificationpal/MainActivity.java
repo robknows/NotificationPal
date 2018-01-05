@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -18,14 +21,25 @@ public class MainActivity extends AppCompatActivity {
 
         Registry registry = new Registry(new Notifier((NotificationManager) this.getSystemService(NOTIFICATION_SERVICE), this));
 
+        HashSet<Constraint> constraints = new HashSet<>();
+
+        Button arbitraryConstraintButton = (Button) findViewById(R.id.arbitraryConstraintButton);
+        arbitraryConstraintButton.setOnClickListener(view -> constraints.add(new ArbitraryConstraint()));
+
+        Button timeConstraintButton = (Button) findViewById(R.id.timeConstraintButton);
+        timeConstraintButton.setOnClickListener(view -> display(view, "Time constraints aren't supported yet."));
+
         FloatingActionButton submitNotificationButton = (FloatingActionButton) findViewById(R.id.submitNotification);
         submitNotificationButton.setOnClickListener(view -> {
-            Constraint arbitraryConstraint = new ArbitraryConstraint();
-
             String notificationTitle = ((EditText) findViewById(R.id.notificationName)).getText().toString();
 
             if (!registry.contains(notificationTitle)) {
-                registry.registerNotification(notificationTitle, arbitraryConstraint);
+                // Just for now, ensure that the arbitrary constraint is included
+                ArbitraryConstraint arbitraryConstraint = new ArbitraryConstraint();
+                constraints.add(arbitraryConstraint);
+                registry.registerNotification(notificationTitle, constraints);
+
+                // Also just for now
                 arbitraryConstraint.notifySubscribers();
             } else {
                 display(view, "You have already registered a notification with this name.");

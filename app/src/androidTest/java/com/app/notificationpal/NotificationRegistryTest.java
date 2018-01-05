@@ -47,8 +47,6 @@ public class NotificationRegistryTest {
         onView(withId(R.id.notificationName)).perform(replaceText("Train Time")).perform(closeSoftKeyboard());
         onView(withId(R.id.submitNotification)).perform(click());
         onView(withId(R.id.submitNotification)).perform(click());
-        onView(withId(R.id.submitNotification)).perform(click());
-        onView(withId(R.id.submitNotification)).perform(click());
 
         assertEquals("Train Time", notificationManager.getActiveNotifications()[0].getNotification().extras.getString(Notification.EXTRA_TITLE));
         assertEquals(1, notificationManager.getActiveNotifications().length);

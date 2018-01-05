@@ -2,6 +2,7 @@ package com.app.notificationpal;
 
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public class Registry {
@@ -13,11 +14,9 @@ public class Registry {
         registeredNotifications = new ArrayList<>();
     }
 
-    public void registerNotification(String notificationTitle, Constraint... constraints) {
+    public void registerNotification(String notificationTitle, Set<Constraint> constraints) {
         RegisteredNotification newNotification = new RegisteredNotification(notifier, notificationTitle);
-        for (Constraint constraint : constraints) {
-            newNotification.subscribe(constraint);
-        }
+        constraints.forEach(newNotification::subscribe);
         newNotification.activate();
         registeredNotifications.add(newNotification);
     }
@@ -37,6 +36,11 @@ public class Registry {
     }
 
     public boolean contains(String notificationTitle) {
-        return registeredNotifications.stream().anyMatch(registeredNotification -> notificationTitle.equals(registeredNotification.title));
+        return registeredNotifications.stream().anyMatch(new Predicate<RegisteredNotification>() {
+            @Override
+            public boolean test(RegisteredNotification registeredNotification) {
+                return notificationTitle.equals(registeredNotification.title);
+            }
+        });
     }
 }

@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.HashSet;
+
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -17,19 +19,29 @@ public class RegistryTest {
     private Registry registry;
     private Constraint arbitraryConstraint;
     private TimeConstraint timeConstraint;
+    private HashSet<Constraint> arbitraryConstraintOnly;
+    private HashSet<Constraint> bothConstraints;
 
     @Before
     public void beforeEach() {
         mockNotifier = Mockito.mock(Notifier.class);
         registry = new Registry(mockNotifier);
+
         arbitraryConstraint = new ArbitraryConstraint();
         timeConstraint = new TimeConstraint(TimeConstraint.Range.AFTER, TimeConstraint.Granularity.HOUR, 16);
+
+        arbitraryConstraintOnly = new HashSet<>();
+        arbitraryConstraintOnly.add(arbitraryConstraint);
+
+        bothConstraints = new HashSet<>();
+        bothConstraints.add(arbitraryConstraint);
+        bothConstraints.add(timeConstraint);
     }
 
     @Test
     public void canRegisterNotification() {
         assertEquals(0, registry.count());
-        registry.registerNotification("Hello!", arbitraryConstraint);
+        registry.registerNotification("Hello!", arbitraryConstraintOnly);
         assertEquals(1, registry.count());
         arbitraryConstraint.notifySubscribers();
         verify(mockNotifier).createNotification("Hello!");
@@ -38,7 +50,7 @@ public class RegistryTest {
 
     @Test
     public void canUnRegisterNotification() {
-        registry.registerNotification("Hello!", arbitraryConstraint);
+        registry.registerNotification("Hello!", arbitraryConstraintOnly);
 
         arbitraryConstraint.notifySubscribers();
         verify(mockNotifier, times(1)).createNotification("Hello!");
@@ -55,7 +67,7 @@ public class RegistryTest {
 
     @Test
     public void notificationWithTwoConstraintsDoesntTriggerAfterOnlyOneNotifies() {
-        registry.registerNotification("Hello!", arbitraryConstraint, timeConstraint);
+        registry.registerNotification("Hello!", bothConstraints);
 
         arbitraryConstraint.notifySubscribers();
 
@@ -64,7 +76,7 @@ public class RegistryTest {
 
     @Test
     public void notificationWithTwoConstraintsTriggersAfterBothNotify() {
-        registry.registerNotification("Hello!", arbitraryConstraint, timeConstraint);
+        registry.registerNotification("Hello!", bothConstraints);
 
         arbitraryConstraint.notifySubscribers();
         timeConstraint.notifySubscribers();

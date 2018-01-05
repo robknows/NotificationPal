@@ -27,6 +27,19 @@
             android:layout_width="165dp"
             android:layout_height="59dp"
             android:entries="@array/constraint_types" />
+
+        <Button
+            android:id="@+id/arbitraryConstraintButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Arbitrary Constraint" />
+
+        <Button
+            android:id="@+id/timeConstraintButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Constraint" />
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
