@@ -13,11 +13,11 @@ import android.widget.EditText;
 
 import java.util.HashSet;
 
-public class MainActivity extends AppCompatActivity {
+public class NotificationCreationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_notification_creation);
 
         Registry registry = new Registry(new Notifier((NotificationManager) this.getSystemService(NOTIFICATION_SERVICE), this));
 
