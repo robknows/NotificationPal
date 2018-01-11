@@ -22,23 +22,17 @@
             android:text="@string/notification_name"
             android:visibility="visible" />
 
-        <Spinner
-            android:id="@+id/constraintTypeSpinner"
-            android:layout_width="165dp"
-            android:layout_height="59dp"
-            android:entries="@array/constraint_types" />
-
         <Button
             android:id="@+id/arbitraryConstraintButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Arbitrary Constraint" />
+            android:text="@string/arbitrary_constraint" />
 
         <Button
             android:id="@+id/timeConstraintButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Time Constraint" />
+            android:text="@string/time_constraint" />
 
     </LinearLayout>
 

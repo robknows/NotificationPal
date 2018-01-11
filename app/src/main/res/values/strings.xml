@@ -8,6 +8,9 @@
     <string name="time">Time</string>
     <string name="location">Location</string>
 
+    <string name="arbitrary_constraint">Arbitrary Constraint</string>
+    <string name="time_constraint">Time Constraint</string>
+
     <string-array name="constraint_types">
         <item>@string/time</item>
         <item>@string/location</item>
