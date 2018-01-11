@@ -37,10 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 // Just for now, ensure that the arbitrary constraint is included
                 ArbitraryConstraint arbitraryConstraint = new ArbitraryConstraint();
                 constraints.add(arbitraryConstraint);
+                //
+
                 registry.registerNotification(notificationTitle, constraints);
 
                 // Also just for now
                 arbitraryConstraint.notifySubscribers();
+                //
+
+                constraints.clear();
             } else {
                 display(view, "You have already registered a notification with this name.");
             }
