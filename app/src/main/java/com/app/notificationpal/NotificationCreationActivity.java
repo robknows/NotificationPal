@@ -19,7 +19,7 @@ public class NotificationCreationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_creation);
 
-        Registry registry = new Registry(new Notifier((NotificationManager) this.getSystemService(NOTIFICATION_SERVICE), this));
+        Registry registry = new Registry(new Notifier(this.getSystemService(NotificationManager.class), this));
 
         HashSet<Constraint> constraints = new HashSet<>();
 
