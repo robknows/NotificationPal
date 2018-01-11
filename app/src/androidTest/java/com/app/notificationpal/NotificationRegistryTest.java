@@ -9,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -31,6 +32,11 @@ public class NotificationRegistryTest {
 
     private Context appContext = InstrumentationRegistry.getTargetContext();
     private NotificationManager notificationManager = (NotificationManager) appContext.getSystemService(NOTIFICATION_SERVICE);
+
+    @Before
+    public void beforeEach() {
+        notificationManager.cancelAll();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Test

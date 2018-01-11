@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
         HashSet<Constraint> constraints = new HashSet<>();
 
-        Button arbitraryConstraintButton = (Button) findViewById(R.id.arbitraryConstraintButton);
+        Button arbitraryConstraintButton = findViewById(R.id.arbitraryConstraintButton);
         arbitraryConstraintButton.setOnClickListener(view -> constraints.add(new ArbitraryConstraint()));
 
-        Button timeConstraintButton = (Button) findViewById(R.id.timeConstraintButton);
+        Button timeConstraintButton = findViewById(R.id.timeConstraintButton);
         timeConstraintButton.setOnClickListener(view -> display(view, "Time constraints aren't supported yet."));
 
-        FloatingActionButton submitNotificationButton = (FloatingActionButton) findViewById(R.id.submitNotification);
+        FloatingActionButton submitNotificationButton = findViewById(R.id.submitNotification);
         submitNotificationButton.setOnClickListener(view -> {
             String notificationTitle = ((EditText) findViewById(R.id.notificationName)).getText().toString();
 

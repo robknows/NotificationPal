@@ -7,6 +7,8 @@ import android.support.annotation.RequiresApi;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -23,10 +25,10 @@ public class NotifierTest {
         assertEquals("com.app.notificationpal", appContext.getPackageName());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Test
     public void canCreateNotification() {
         new Notifier(notificationManager, appContext).createNotification("West Dulwich to Victoria train in 15 minutes");
-        assertEquals("com.app.notificationpal", notificationManager.getActiveNotifications()[0].getPackageName());
+        assertEquals(1, notificationManager.getActiveNotifications().length);
     }
 }
