@@ -1,3 +1,5 @@
+# ARCHIVED
+
 # NotificationPal
 
 I am making this because I want to have highly customisable notifications for my 
